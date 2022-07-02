@@ -1,0 +1,43 @@
+Задача:
+
+3.
+За период с 5 июня 2019 года (включительно) выведите:
+номер транзакции;
+название магазина, где она произошла;
+категорию и название приобретённого продукта.
+Алгоритм решения
+Получите:
+id_transaction из таблицы transactions
+name_store из таблицы stores
+category из таблицы products
+name из таблицы products
+Методом INNER JOIN соедините таблицу transactions с таблицей products по полю id_product; затем соедините таблицы transactions и stores по полю id_store.
+В блоке WHERE укажите условие по дате '2019-06-05'.
+Выведите поля: id_transaction, name_store, category, name.
+
+Решение:
+
+SELECT 
+	transactions.id_transaction,
+    stores.name_store,
+    products.category,
+    products.name
+FROM
+	transactions
+INNER JOIN products ON transactions.id_product = products.id_product
+INNER JOIN stores ON transactions.id_store = stores.id_store
+WHERE 	transactions.date > '2019-06-05'
+
+----------------------------------------------------------------------------------
+
+Напишите запрос, который найдёт максимальный вес продукта в категории «молоко и сливки». 
+Для приведения значений в запросе к
+ числу с плавающей точкой примените конструкцию CAST...AS, в качестве имени укажите max_weight.
+
+Решение:
+SELECT 
+	MAX (CAST(weight AS real)) AS max_weight
+FROM
+	products_data_all
+WHERE
+    units='г'
