@@ -41,3 +41,51 @@ FROM
 	products_data_all
 WHERE
     units='г'
+
+
+Задача 1.
+.
+Напишите запрос, который посчитает общее количество уникальных продуктов в каждом магазине (name_store), информация о котором есть в таблице products_data_all. Назовите переменные name_cnt, name_uniq_cnt соответственно. Выведите название магазина, общее количество продуктов, количество уникальных продуктов.
+
+Решение:
+ SELECT 
+    name_store,
+    COUNT(name) AS name_cnt,
+    COUNT(DISTINCT name) AS name_uniq_cnt
+FROM
+	products_data_all
+GROUP BY
+    name_store;
+1)	Функцией  COUNT считаем сколько всего товаров в столбце name
+2)	Функцией DISTINCT перебираем столбец name на уникальные товары.
+
+
+Задача №2
+Напишите запрос, который подсчитает значение максимального веса в каждой категории (category). Назовите переменную max_weight. Выведите категорию и максимальный вес.
+
+SELECT 
+    category,
+	MAX (CAST(weight AS real)) AS max_weight
+FROM
+	products_data_all
+GROUP BY 
+    category;
+
+
+
+
+Задача №3
+
+Напишите запрос, который посчитает среднюю, максимальную и минимальную цены (price) товаров для каждого магазина (name_store) в таблице products_data_all. Назовите переменные соответственно average_price, max_price, min_price.
+Выведите название магазина, среднюю, максимальную и минимальную цены.
+Менять тип выбираемых из колонок (приводить данные к каком-либо типу) не нужно.
+
+SELECT 
+	name_store,
+    AVG(price) AS average_price,
+    MAX(price) AS max_price,
+    MIN(price) AS min_price
+FROM
+	products_data_all
+GROUP BY
+	name_store;
